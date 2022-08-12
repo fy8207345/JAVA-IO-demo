@@ -19,14 +19,16 @@ public class WriteToFileChannel {
         //转换为写模式
         byteBuffer.clear();
         byteBuffer.put((byte)'h');
-        byteBuffer.put((byte)'h');
-        byteBuffer.put((byte)'h');
+        byteBuffer.putChar('h');
+        byteBuffer.putInt('h');
         //必须转换为读模式，否则读取不到
         byteBuffer.flip();
         int lengthWrite = fileChannel.write(byteBuffer);
         log.info("lengthWrite: {}", lengthWrite);
         //flush到磁盘
         fileChannel.force(true);
+        //使文件长度只有一个字节
+        fileChannel.truncate(1);
         fileChannel.close();
     }
 }
