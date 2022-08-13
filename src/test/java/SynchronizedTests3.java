@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class SynchronizedTests3 {
 
     public static void main(String[] args) {
-        Counter counter = new Counter();
+        final Counter counter = new Counter();
         Runnable get = new Runnable() {
             @Override
             public void run() {
@@ -36,7 +36,7 @@ public class SynchronizedTests3 {
         executorService.execute(get);
         executorService.execute(get);
         executorService.execute(set);
-        executorService.submit()
+        executorService.submit(get);
 
         executorService.shutdown();
     }
